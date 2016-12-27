@@ -4,3 +4,5 @@ def fibonacci():
 		yield lead
 		trail, lead = lead, trail + lead
 
+if __name__ == '__main()__':
+	fibonacci()
