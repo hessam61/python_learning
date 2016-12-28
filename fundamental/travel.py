@@ -1,8 +1,8 @@
 """ model for airplanes """
 
 class Flight:
-
-	def __init__(self, number):
+	""" Flight with a passenfer airplanes """
+	def __init__(self, number, aircraft):
 		if not number[:2].isalpha():
 			raise ValueError("Airline code with value '{}' does not exist".format(number))
 
@@ -13,6 +13,7 @@ class Flight:
 			raise ValueError("Invalid route number '{}'".format(number))
 
 		self._number = number
+		self._aircraft = aircraft
 
 	def number(self):
 		print(self._number[:2])
@@ -21,6 +22,10 @@ class Flight:
 	""" Get airline code """
 	def airline(number):
 		return self._number[:2]
+
+	def aircraft_model(self):
+		return self._aircraft.model()
+
 
 class Aircraft:
 
