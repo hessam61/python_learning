@@ -15,6 +15,11 @@ class Flight:
 		self._number = number
 		self._aircraft = aircraft
 
+		#gets the range for rows and number of seats from seating_plan()
+		rows, seats = self._aircraft.seating_plan()
+		self._seating = [None] + [{letter: None for letter in seats} for _ in rows]
+		print (self._seating)
+
 	def number(self):
 		print(self._number[:2])
 		return self._number
@@ -43,4 +48,6 @@ class Aircraft:
 
 	def seating_plan(self):
 		return (range(1, self._num_rows + 1),
+				"ABCDEFGHJK"[:self._num_seats_per_row])
+		print(range(1, self._num_rows + 1),
 				"ABCDEFGHJK"[:self._num_seats_per_row])
