@@ -31,9 +31,37 @@ class Flight:
 	def aircraft_model(self):
 		return self._aircraft.model()
 
+	def allocate_seat(self, seat, passenger):
+		""" Allocate one seat to each passenger 
+		
+		Arguments:	Seat designator like "12B"
+					Passenger: Just a text string name
+
+		Raises:		ValueError if seat number is invalid or unavailable 
+		"""
+		rows, seat_letter = self._aircraft.seating_plan()
+
+		letter = seat[-1]
+
+		if letter not in seat_letter:
+			raise ValueError("Invalid seat letter{}".format(letter))
+
+		row_text = seat[:-1]
+
+		try:
+			row = int(row_text)
+		except ValueError:
+			raise ValueError("Invalid seat row {}".format(row_text))
+
+		if row not in rows:
+			raise ValueError("Invalid row number {}".format(row))
+
+		if self._seating[row][letter] is not None:
+			raise ValueError("Seat {} is taken".format(seat))
+
+		self._seating[row][letter] = passenger
 
 class Aircraft:
-
 	def __init__(self,registration,model,num_rows,num_seats_per_row):
 		self._registration = registration
 		self._model = model
