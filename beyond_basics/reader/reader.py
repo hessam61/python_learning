@@ -9,7 +9,7 @@ extension_map = {
 
 class Reader:
 	def __init__(self, filename):
-		extension = os.path,splitext(filename)[1]
+		extension = os.path.splitext(filename)[1]
 		opener = extension_map.get(extension, open)
 		self.filename = filename
 		self.f = opener(self.filename, 'rt')
