@@ -46,4 +46,15 @@ class RefrigeratedShippingContainer(ShippingContainer):
 		super().__init__(owner_code,contents)
 		if temp > RefrigeratedShippingContainer.MAX_TEMP:
 			raise ValueError("Temperature is too Hot!")
-		self.temp = temp
+		#not a part f public interface
+		self._temp = temp
+
+	@property
+	def temp(self):
+		return self._temp
+
+	@temp.setter
+	def temp(self, value):
+		if value > RefrigeratedShippingContainer.MAX_TEMP:
+			raise ValueError ("Too hot of temperature for thsi container")
+		self._temp = value
