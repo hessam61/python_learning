@@ -83,3 +83,16 @@ class RefrigeratedShippingContainer(ShippingContainer):
 	def volume_ft3(self):
 		return (super.volume_ft3 - RefrigeratedShippingContainer.FRIDGE_VOLUME_FT3)
 
+
+class HeatedRefrigeratedShippingContainer(RefrigeratedShippingContainer):
+
+	MIN_TEMP_CELSIUS = -20.0
+
+	@RefrigeratedShippingContainer.temp_celsius.setter
+	def temp_celsius(self, value):
+		if not(HeatedRefrigeratedShippingContainer.MIN_TEMP_CELSIUS
+				<= value
+				<= RefrigeratedShippingContainer.MAX_TEMP_CELSIUS):
+			raise ValueError ("Temperature out of range!")
+		self._temp_celsius = value
+
