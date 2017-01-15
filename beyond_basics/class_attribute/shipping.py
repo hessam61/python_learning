@@ -42,6 +42,8 @@ class RefrigeratedShippingContainer(ShippingContainer):
 
 	MAX_TEMP_CELSIUS = 4.0
 
+	FRIDGE_VOLUME_FT3 = 100
+
 	@staticmethod
 	def _make_code(owner_code, serial):
 		return (owner_code+'R'+str(serial))
@@ -76,4 +78,11 @@ class RefrigeratedShippingContainer(ShippingContainer):
 	@temp_fahrenheit.setter
 	def temp_fahrenheit(self, value):
 		self.temp_celsius = RefrigeratedShippingContainer._f_to_c(value)
+
+	@property
+	def volume_ft3(self):
+		return (self.length_ft
+				* ShippingContainer.HEIGHT_FT
+				* ShippingContainer.WIDTH_FT
+				- RefrigeratedShippingContainer.FRIDGE_VOLUME_FT3)
 
