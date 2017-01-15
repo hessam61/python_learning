@@ -54,9 +54,9 @@ class RefrigeratedShippingContainer(ShippingContainer):
 	def _f_to_c(temp_fahrenheit):
 		return (temp_fahrenheit - 32) * 5/9
 
-	def __init__(self,owner_code, contents, temp_celsius):
+	def __init__(self,owner_code, length_ft, contents, temp_celsius):
 		# with super() we get a reference to the base class instance to extend the base class version
-		super().__init__(owner_code,contents)
+		super().__init__(owner_code, length_ft, contents)
 		self.temp_celsius = temp_celsius
 
 	@property
