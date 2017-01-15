@@ -27,7 +27,6 @@ class ShippingContainer:
 		return cls(owner_code, length_ft, contents=list(items), *args, **kwargs)
 
 	def __init__(self, owner_code, length_ft, contents):
-		self.owner_code = owner_code
 		self.contents = contents
 		self.length_ft = length_ft
 		# use self instead of class name ShippingContainer for polymorphism, other wise in code U will be used
