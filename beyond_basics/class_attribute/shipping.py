@@ -1,6 +1,9 @@
 
 class ShippingContainer:
 
+	HEIGHT_FT = 8.5
+	WIDTH_FT = 8.0
+
 	next_serial = 1000
 
 	@staticmethod
@@ -15,22 +18,26 @@ class ShippingContainer:
 
 	@classmethod
 	# adding *args, and **kwargs to support the "temp_celsius" attribute in refrigerated sub class
-	def create_empty(cls, owner_code, *args, **kwargs):
+	def create_empty(cls, owner_code, length_ft, *args, **kwargs):
 		""" cls calling ShippingContainer contructor """
-		return cls(owner_code, contents=None, *args, **kwargs)
+		return cls(owner_code, length_ft, contents=None, *args, **kwargs)
 
 	@classmethod
-	def create_with_items(cls, owner_code, items, *args, **kwargs):
-		return cls(owner_code, contents=list(items), *args, **kwargs)
+	def create_with_items(cls, owner_code, items, length_ft, *args, **kwargs):
+		return cls(owner_code, length_ft, contents=list(items), *args, **kwargs)
 
-	def __init__(self, owner_code, contents):
+	def __init__(self, owner_code, length_ft, contents):
 		self.owner_code = owner_code
 		self.contents = contents
+		self.length_ft = length_ft
 		# use self instead of class name ShippingContainer for polymorphism, other wise in code U will be used
 		self.code = self._make_code(
 			owner_code,
 			ShippingContainer._get_next_serial())
 
+	@property
+	def volume_ft3(self):
+		return ShippingContainer.HEIGHT_FT * ShippingContainer.WIDTH_FT * self.length_ft
 
 class RefrigeratedShippingContainer(ShippingContainer):
 
