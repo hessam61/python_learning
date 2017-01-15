@@ -51,10 +51,7 @@ class RefrigeratedShippingContainer(ShippingContainer):
 	def __init__(self,owner_code, contents, temp_celsius):
 		# with super() we get a reference to the base class instance to extend the base class version
 		super().__init__(owner_code,contents)
-		if temp_celsius > RefrigeratedShippingContainer.MAX_TEMP_CELSIUS:
-			raise ValueError("Temperature is too Hot!")
-		#not a part f public interface
-		self._temp_celsius = temp_celsius
+		self.temp_celsius = temp_celsius
 
 	@property
 	def temp_celsius(self):
