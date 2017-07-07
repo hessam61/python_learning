@@ -1,1 +1,1 @@
-Collection of Python learning practices.
+Collection of Python3 learning practices.
